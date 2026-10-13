@@ -54,4 +54,9 @@ Es una plataforma avanzada de automatización y ejecutor de macros construida en
 2. En la raíz del proyecto:
 
 ```bash
-pip install -r requirements.txt
+- Instalar dependencias: `pip install -r requirements.txt`
+- Ejecutar: `python main.py`
+- Compilar el lanzador (pequeño, requiere Python instalado): `build_launcher.bat`
+- Compilar el .exe autónomo: `build_exe.bat` (resultado en `dist/`) (Eliminado)
+- Comprobar sintaxis sin abrir la GUI: `python -m py_compile main.py tab_*.py flow_canvas.py vision.py`
+- No hay tests automatizados ni deploy: la distribución es el .exe.
