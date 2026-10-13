@@ -1,0 +1,69 @@
+{
+  "format": "AutoClickerStudio_Flow",
+  "version": 1,
+  "name": "Buscar imagen y clicar",
+  "start_node": "inicio",
+  "variables": {
+    "intentos": 0
+  },
+  "metadata": {
+    "description": "Ejemplo inicial del motor de flujos. Cambia la ruta de la imagen antes de ejecutarlo."
+  },
+  "nodes": [
+    {
+      "id": "inicio",
+      "type": "start",
+      "name": "Inicio",
+      "next": "buscar"
+    },
+    {
+      "id": "buscar",
+      "type": "condition",
+      "name": "¿Está visible el botón?",
+      "params": {
+        "condition": {
+          "op": "image_visible",
+          "image": "assets/mi_boton.png",
+          "confidence": 0.82,
+          "timeout_s": 2.0
+        }
+      },
+      "on_true": "clic",
+      "on_false": "no_encontrado"
+    },
+    {
+      "id": "clic",
+      "type": "action",
+      "name": "Clicar botón",
+      "params": {
+        "action": "click_image",
+        "arguments": {
+          "image": "assets/mi_boton.png",
+          "confidence": 0.82,
+          "timeout_s": 1.0,
+          "button": "izq",
+          "clicks": 1
+        }
+      },
+      "next": "fin"
+    },
+    {
+      "id": "no_encontrado",
+      "type": "action",
+      "name": "Registrar que no apareció",
+      "params": {
+        "action": "log",
+        "arguments": {
+          "message": "No se encontró el botón en pantalla.",
+          "level": "warn"
+        }
+      },
+      "next": "fin"
+    },
+    {
+      "id": "fin",
+      "type": "end",
+      "name": "Fin"
+    }
+  ]
+}

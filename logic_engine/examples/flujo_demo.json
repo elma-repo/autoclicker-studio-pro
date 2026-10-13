@@ -1,0 +1,68 @@
+{
+  "format": "AutoClickerStudio_Flow",
+  "version": 1,
+  "name": "Demo - rama SI / NO",
+  "start_node": "inicio",
+  "variables": {
+    "intentos": 0,
+    "encontrado": false
+  },
+  "metadata": {
+    "description": "Ejemplo de estructura; requiere conectar el adaptador de visión."
+  },
+  "nodes": [
+    {
+      "id": "inicio",
+      "type": "start",
+      "name": "Inicio",
+      "params": {},
+      "next": "buscar"
+    },
+    {
+      "id": "buscar",
+      "type": "condition",
+      "name": "¿Está visible la imagen?",
+      "params": {
+        "condition": {
+          "op": "image_visible",
+          "image": "assets/boton_abrir.png",
+          "confidence": 0.8,
+          "timeout_s": 1.5
+        }
+      },
+      "on_true": "clic",
+      "on_false": "espera"
+    },
+    {
+      "id": "clic",
+      "type": "action",
+      "name": "Acción si SÍ",
+      "params": {
+        "action": "click_image",
+        "arguments": {
+          "image": "assets/boton_abrir.png",
+          "button": "left",
+          "clicks": 1
+        }
+      },
+      "next": "fin"
+    },
+    {
+      "id": "espera",
+      "type": "set_variable",
+      "name": "Contar intento si NO",
+      "params": {
+        "name": "intentos",
+        "operation": "increment",
+        "value": 1
+      },
+      "next": "fin"
+    },
+    {
+      "id": "fin",
+      "type": "end",
+      "name": "Fin",
+      "params": {}
+    }
+  ]
+}
